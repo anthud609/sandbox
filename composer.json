@@ -1,6 +1,13 @@
 {
     "name": "omni/core",
+    "description": "Omni Core Framework with modular authentication",
+    "type": "library",
     "autoload": {
+        "psr-4": {
+            "Omni\\Core\\": "app/"
+        }
+    },
+    "autoload-dev": {
         "psr-4": {
             "Omni\\Core\\": "app/"
         }
@@ -11,11 +18,29 @@
             "email": "devops@districtomni.com"
         }
     ],
+    "require": {
+        "php": "^8.1"
+    },
     "require-dev": {
-        "behat/behat": "3.11",
-        "behat/mink": "1.10",
-        "behat/mink-extension": "2.3",
-        "behat/mink-goutte-driver": "1.2",
+        "behat/behat": "^3.11",
+        "behat/mink": "^1.10",
+        "behat/mink-extension": "^2.3",
+        "behat/mink-goutte-driver": "^1.2",
         "phpunit/phpunit": "^11.5"
-    }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test-unit": "phpunit --testsuite=Unit",
+        "test-feature": "behat",
+        "test-all": [
+            "@test-unit",
+            "@test-feature"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
