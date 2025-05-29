@@ -7,9 +7,9 @@ use Behat\MinkExtension\Context\MinkContext;
 class FeatureContext extends MinkContext implements Context
 {
     /**
-     * @Given I am on the homepage
+     * @Given I am on the home page
      */
-    public function iAmOnTheHomepage()
+    public function iAmOnTheHomePage()
     {
         $this->visit('/');
     }
@@ -25,5 +25,22 @@ class FeatureContext extends MinkContext implements Context
         $this->pressButton('Login');
     }
 
-    // Removed conflicting step definition - using MinkContext's built-in version
+    /**
+     * @When I click :link
+     */
+    public function iClick($link)
+    {
+        $this->clickLink($link);
+    }
+
+    /**
+     * Debug method to see page content
+     * @Then I should see the page content
+     */
+    public function iShouldSeeThePageContent()
+    {
+        echo "\n--- PAGE CONTENT ---\n";
+        echo $this->getSession()->getPage()->getContent();
+        echo "\n--- END PAGE CONTENT ---\n";
+    }
 }

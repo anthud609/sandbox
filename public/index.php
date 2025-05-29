@@ -20,6 +20,7 @@ $router->get('/', function() {
     }
 });
 
+
 $router->get('/login', [AuthController::class, 'showLogin']);
 $router->post('/login', [AuthController::class, 'processLogin']);
 $router->get('/logout', [AuthController::class, 'logout']);

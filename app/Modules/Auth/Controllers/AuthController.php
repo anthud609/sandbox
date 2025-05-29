@@ -22,7 +22,8 @@ class AuthController
         $error = $_SESSION['login_error'] ?? '';
         unset($_SESSION['login_error']);
 
-        echo $this->renderLoginForm($error);
+        // Pass error to the view
+        include __DIR__ . '/../Views/LoginView.php';
     }
 
     public function processLogin() 
@@ -55,48 +56,5 @@ class AuthController
         session_destroy();
         header('Location: /');
         exit;
-    }
-
-    private function renderLoginForm($error = '') 
-    {
-        return '<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 400px; margin: 50px auto; padding: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="email"], input[type="password"] { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
-        button { background: #007cba; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
-        button:hover { background: #005a87; }
-        .error { color: red; margin-bottom: 15px; }
-        .back-link { margin-top: 15px; }
-    </style>
-</head>
-<body>
-    <h2>Login</h2>
-    ' . ($error ? '<div class="error">' . htmlspecialchars($error) . '</div>' : '') . '
-    <form method="POST" action="/login">
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit">Login</button>
-    </form>
-    <div class="back-link">
-        <a href="/">Back to Home</a>
-    </div>
-    <div style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-radius: 4px;">
-        <strong>Test Credentials:</strong><br>
-        Email: test@example.com<br>
-        Password: password123
-    </div>
-</body>
-</html>';
     }
 }
