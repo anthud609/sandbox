@@ -1,11 +1,10 @@
 default:
   suites:
-    module_name:
+    auth:
       paths:
-        - app/Modules/ModuleName/Features
+        - app/Modules/Auth/Features
       contexts:
-        - App\Modules\ModuleName\Features\Bootstrap\FeatureContext
-
+        - Omni\Core\Modules\Auth\Features\Bootstrap\FeatureContext
   extensions:
     Behat\MinkExtension:
       base_url: http://lms.dev.local/
