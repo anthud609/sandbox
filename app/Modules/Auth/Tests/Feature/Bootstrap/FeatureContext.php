@@ -1,5 +1,5 @@
 <?php
-namespace Omni\Core\Modules\Auth\Features\Bootstrap;
+namespace Omni\Core\Modules\Auth\Tests\Feature\Bootstrap;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
