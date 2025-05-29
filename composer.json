@@ -1,32 +1,15 @@
 {
-    "name": "omni/core",
-    "description": "Omni Core Framework with modular authentication",
-    "type": "library",
-    "autoload": {
-        "psr-4": {
-            "Omni\\Core\\": "app/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Omni\\Core\\": "app/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Anthony Hudson",
-            "email": "devops@districtomni.com"
-        }
-    ],
-    "require": {
-        "php": "^8.1"
-    },
     "require-dev": {
         "behat/behat": "^3.11",
         "behat/mink": "^1.10",
         "behat/mink-extension": "^2.3",
         "behat/mink-goutte-driver": "^1.2",
-        "phpunit/phpunit": "^11.5"
+        "phpunit/phpunit": "^11.5",
+        "squizlabs/php_codesniffer": "^3.13",
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "phpstan/phpstan": "^2.1",
+        "phpmd/phpmd": "^2.15"
+      
     },
     "scripts": {
         "test": "phpunit --testdox --colors=always",
@@ -45,12 +28,45 @@
             "echo \"\\n=== FEATURE TESTS (Detailed) ===\"",
             "behat --colors --verbose"
         ],
-        "test-quick": "phpunit --colors=always && behat --colors"
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "sort-packages": true
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+        "test-quick": "phpunit --colors=always && behat --colors",
+        "cs": "php-cs-fixer fix --dry-run --diff --verbose",
+        "cs-fix": "php-cs-fixer fix --verbose",
+        "cs-check": "phpcs --standard=phpcs.xml",
+    "cs-report": "phpcs --standard=phpcs.xml -s",
+        "cs-fix-phpcs": "phpcbf --standard=phpcs.xml",
+        "cs-all": [
+            "echo \"\\n🔍 Running PHP CS Fixer (dry-run)...\"",
+            "@cs",
+            "echo \"\\n🔍 Running PHP CodeSniffer...\"",
+            "@cs-check"
+        ],
+        "fix-all": [
+            "echo \"\\n🔧 Fixing with PHP CS Fixer...\"",
+            "@cs-fix",
+            "echo \"\\n🔧 Fixing with PHP CodeSniffer...\"",
+            "@cs-fix-phpcs",
+            "echo \"\\n✅ All code style issues fixed!\""
+        ],
+        "quality": [
+            "echo \"\\n🔍 Running Code Quality Checks...\"",
+            "@cs-all",
+            "echo \"\\n🧪 Running Tests...\"",
+            "@test-all",
+            "echo \"\\n✅ Quality checks completed!\""
+        ],
+        "quality-fix": [
+            "echo \"\\n🔧 Fixing Code Quality Issues...\"",
+            "@fix-all",
+            "echo \"\\n🧪 Running Tests After Fixes...\"",
+            "@test-all",
+            "echo \"\\n✅ Quality fixes and tests completed!\""
+        ],
+        "stan": "phpstan analyse --level=8",
+        "mess": "phpmd app text cleancode,codesize,controversial,design,naming,unusedcode",
+        "full-check": [
+            "@quality",
+            "@stan",
+            "@mess"
+        ]
+    }
 }

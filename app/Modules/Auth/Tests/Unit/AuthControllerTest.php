@@ -1,8 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Omni\Core\Modules\Auth\Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
 use Omni\Core\Modules\Auth\Controllers\AuthController;
+use PHPUnit\Framework\TestCase;
 
 class AuthControllerTest extends TestCase
 {
@@ -14,7 +17,7 @@ class AuthControllerTest extends TestCase
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        
+
         $this->authController = new AuthController();
         $this->authController->setTestMode(true); // Enable test mode to prevent redirects
     }

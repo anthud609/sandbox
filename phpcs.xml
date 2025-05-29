@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         name="Omni Core Coding Standard"
+         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
+
+    <description>Omni Core Framework Coding Standard</description>
+
+    <!-- Include PSR12 as base standard -->
+    <rule ref="PSR12"/>
+    
+    <!-- Additional Generic rules -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.Classes.DuplicateClassName"/>
+    <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
+    <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
+    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
+    <rule ref="Generic.Commenting.DocComment"/>
+    <rule ref="Generic.Files.ByteOrderMark"/>
+    <rule ref="Generic.Files.LineEndings"/>
+    <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
+    <rule ref="Generic.NamingConventions.ConstructorName"/>
+    <rule ref="Generic.PHP.DeprecatedFunctions"/>
+    <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+    <rule ref="Generic.PHP.ForbiddenFunctions"/>
+    <rule ref="Generic.PHP.NoSilencedErrors"/>
+    <rule ref="Generic.Strings.UnnecessaryStringConcat"/>
+    <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+    
+    <!-- PEAR rules -->
+    <rule ref="PEAR.Classes.ClassDeclaration"/>
+    <rule ref="PEAR.Commenting.InlineComment"/>
+    <rule ref="PEAR.Functions.ValidDefaultValue"/>
+    
+    <!-- Squiz rules -->
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
+    <rule ref="Squiz.Classes.ClassFileName"/>
+    <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
+    <rule ref="Squiz.Classes.ValidClassName"/>
+    <rule ref="Squiz.Commenting.DocCommentAlignment"/>
+    <rule ref="Squiz.Commenting.EmptyCatchComment"/>
+    <rule ref="Squiz.Functions.FunctionDeclaration"/>
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing"/>
+    <rule ref="Squiz.Functions.LowercaseFunctionKeywords"/>
+    <rule ref="Squiz.Objects.ObjectInstantiation"/>
+    <rule ref="Squiz.Operators.ValidLogicalOperators"/>
+    <rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops"/>
+    <rule ref="Squiz.PHP.Eval"/>
+    <rule ref="Squiz.PHP.GlobalKeyword"/>
+    <rule ref="Squiz.PHP.InnerFunctions"/>
+    <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
+    <rule ref="Squiz.PHP.NonExecutableCode"/>
+    <rule ref="Squiz.Scope.MemberVarScope"/>
+    <rule ref="Squiz.Scope.MethodScope"/>
+    <rule ref="Squiz.Scope.StaticThisUsage"/>
+    <rule ref="Squiz.Strings.ConcatenationSpacing">
+        <properties>
+            <property name="spacing" value="1"/>
+            <property name="ignoreNewlines" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.CastSpacing"/>
+    <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
+    <rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing"/>
+    <rule ref="Squiz.WhiteSpace.OperatorSpacing"/>
+    <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
+
+    <!-- Paths to check -->
+    <file>app</file>
+    <file>public</file>
+    
+    <!-- Paths to ignore -->
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>cache/*</exclude-pattern>
+    <exclude-pattern>logs/*</exclude-pattern>
+    <exclude-pattern>*.blade.php</exclude-pattern>
+    
+    <!-- Configuration -->
+    <arg name="basepath" value="."/>
+    <arg name="colors"/>
+    <arg name="parallel" value="75"/>
+    <arg value="np"/>
+    
+    <!-- Show progress -->
+    <arg value="p"/>
+    
+    <!-- Show sniff codes in all reports -->
+    <arg value="s"/>
+    
+    <!-- Custom severity levels -->
+    <config name="ignore_warnings_on_exit" value="1"/>
+    <config name="ignore_errors_on_exit" value="0"/>
+    
+    <!-- Line length rules -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="150"/>
+        </properties>
+    </rule>
+    
+    <!-- Complexity rules -->
+    <rule ref="Generic.Metrics.CyclomaticComplexity">
+        <properties>
+            <property name="complexity" value="10"/>
+            <property name="absoluteComplexity" value="15"/>
+        </properties>
+    </rule>
+    
+    <rule ref="Generic.Metrics.NestingLevel">
+        <properties>
+            <property name="nestingLevel" value="5"/>
+            <property name="absoluteNestingLevel" value="10"/>
+        </properties>
+    </rule>
+
+</ruleset>

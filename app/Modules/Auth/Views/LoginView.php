@@ -15,7 +15,7 @@
 </head>
 <body>
     <h2>Login</h2>
-    <?php if (!empty($error)): ?>
+    <?php if (!empty($error)) : ?>
         <div class="error"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
     <form method="POST" action="/login">

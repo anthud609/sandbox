@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Omni\Core\Modules\Auth\Tests\Feature\Bootstrap;
 
 use Behat\Behat\Context\Context;
@@ -7,6 +10,8 @@ use Behat\MinkExtension\Context\MinkContext;
 class FeatureContext extends MinkContext implements Context
 {
     /**
+     * Navigate to the home page.
+     *
      * @Given I am on the home page
      */
     public function iAmOnTheHomePage()
@@ -15,6 +20,11 @@ class FeatureContext extends MinkContext implements Context
     }
 
     /**
+     * Log in using the provided email and password.
+     *
+     * @param mixed $email
+     * @param mixed $password
+     *
      * @Given I am logged in as :email with password :password
      */
     public function iAmLoggedInAs($email, $password)
@@ -26,6 +36,10 @@ class FeatureContext extends MinkContext implements Context
     }
 
     /**
+     * Click on the specified link.
+     *
+     * @param mixed $link
+     *
      * @When I click :link
      */
     public function iClick($link)
@@ -34,7 +48,8 @@ class FeatureContext extends MinkContext implements Context
     }
 
     /**
-     * Debug method to see page content
+     * Print the full page content for debugging purposes.
+     *
      * @Then I should see the page content
      */
     public function iShouldSeeThePageContent()
