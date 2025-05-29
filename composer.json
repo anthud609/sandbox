@@ -29,13 +29,23 @@
         "phpunit/phpunit": "^11.5"
     },
     "scripts": {
-        "test": "phpunit",
-        "test-unit": "phpunit --testsuite=Unit",
-        "test-feature": "behat",
+        "test": "phpunit --testdox --colors=always",
+        "test-unit": "phpunit --testsuite=Unit --testdox --colors=always",
+        "test-feature": "behat --colors",
         "test-all": [
+            "echo \"\\n🧪 Running Unit Tests...\"",
             "@test-unit",
-            "@test-feature"
-        ]
+            "echo \"\\n🎭 Running Feature Tests...\"", 
+            "@test-feature",
+            "echo \"\\n✅ All tests completed!\""
+        ],
+        "test-verbose": [
+            "echo \"\\n=== UNIT TESTS (Detailed) ===\"",
+            "phpunit --testdox --display-warnings --display-notices --colors=always",
+            "echo \"\\n=== FEATURE TESTS (Detailed) ===\"",
+            "behat --colors --verbose"
+        ],
+        "test-quick": "phpunit --colors=always && behat --colors"
     },
     "config": {
         "optimize-autoloader": true,
