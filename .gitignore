@@ -1,0 +1,154 @@
+# -------------------------
+# OS generated files
+# -------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# -------------------------
+# IDE / Editor folders/files
+# -------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# -------------------------
+# Composer dependencies
+# -------------------------
+/vendor/
+/composer.lock
+
+# -------------------------
+# PHP cache / runtime
+# -------------------------
+/cache/
+/var/cache/
+/tmp/
+/var/tmp/
+/storage/cache/
+/storage/framework/cache/
+
+# Opcache files (if applicable)
+*.opcache
+
+# -------------------------
+# Logs
+# -------------------------
+/logs/
+/var/log/
+/storage/logs/
+/*.log
+*.log.*
+
+# -------------------------
+# Session files
+# -------------------------
+/sessions/
+/var/session/
+/storage/framework/sessions/
+
+# -------------------------
+# Build, deploy & artifacts
+# -------------------------
+/build/
+/dist/
+/node_modules/
+/public/build/
+/public/dist/
+/public/node_modules/
+
+# -------------------------
+# Environment config files
+# -------------------------
+.env
+.env.local
+.env.*.local
+
+# -------------------------
+# PHPUnit / Testing artifacts
+# -------------------------
+/phpunit.xml
+/phpunit.xml.dist
+/build/logs/
+/coverage/
+/tests/_output/
+/tests/_support/_generated/
+/tests/_support/Helper.php
+
+# -------------------------
+# Misc files
+# -------------------------
+*.cache
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.old
+*.orig
+*.rej
+
+# -------------------------
+# SSH and private keys
+# -------------------------
+*.pem
+*.key
+*.crt
+*.csr
+
+# -------------------------
+# Backup files
+# -------------------------
+*~ 
+*.bak
+
+# -------------------------
+# Ignore Composer PHAR if present
+# -------------------------
+composer.phar
+
+# -------------------------
+# Ignore dotenv sensitive files if used in repo by accident
+# -------------------------
+.env.backup
+.env.example
+
+# -------------------------
+# Ignore generated IDE helper files (Laravel-style, if any)
+# -------------------------
+/_ide_helper.php
+/_ide_helper_models.php
+
+# -------------------------
+# Ignore cache for PHPUnit or other test frameworks
+# -------------------------
+.phpunit.result.cache
+
+# -------------------------
+# Ignore logs & cache for other tools (if used)
+/php-cs-fixer.cache
+/phpstan.cache
+/psalm.cache
+
+# -------------------------
+# Ignore docker and container related files if any
+# -------------------------
+.docker/
+docker-compose.override.yml
+docker-compose.prod.yml
+
+# -------------------------
+# Ignore NPM/Yarn files if any frontend tools exist
+# -------------------------
+package-lock.json
+yarn.lock
+.pnp.*
+.pnp.js
+.pnp.cjs
+
+# -------------------------
+# Ignore generated Thumbs or media cache (if any)
+/public/uploads/.thumbs/

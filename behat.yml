@@ -1,0 +1,12 @@
+default:
+  suites:
+    module_name:
+      paths:
+        - app/Modules/ModuleName/Features
+      contexts:
+        - App\Modules\ModuleName\Features\Bootstrap\FeatureContext
+
+  extensions:
+    Behat\MinkExtension:
+      base_url: http://lms.dev.local/
+      goutte: ~

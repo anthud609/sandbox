@@ -1,0 +1,20 @@
+{
+    "name": "omni/core",
+    "autoload": {
+        "psr-4": {
+            "Omni\\Core\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Anthony Hudson",
+            "email": "devops@districtomni.com"
+        }
+    ],
+    "require-dev": {
+        "behat/behat": "3.11",
+        "behat/mink": "1.10",
+        "behat/mink-extension": "2.3",
+        "behat/mink-goutte-driver": "1.2"
+    }
+}
