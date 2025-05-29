@@ -29,7 +29,7 @@ class AuthControllerTest extends TestCase
         $_POST = [];
     }
 
-    public function testProcessLoginWithValidCredentials()
+    public function testProcessLoginWithValidCredentials(): void
     {
         $_POST['email'] = 'test@example.com';
         $_POST['password'] = 'password123';
@@ -42,7 +42,7 @@ class AuthControllerTest extends TestCase
         $this->assertEquals('/', $_SESSION['_test_redirect']); // Should redirect to home
     }
 
-    public function testProcessLoginWithInvalidCredentials()
+    public function testProcessLoginWithInvalidCredentials(): void
     {
         $_POST['email'] = 'wrong@example.com';
         $_POST['password'] = 'wrongpassword';
@@ -54,7 +54,7 @@ class AuthControllerTest extends TestCase
         $this->assertEquals('/login', $_SESSION['_test_redirect']); // Should redirect back to login
     }
 
-    public function testProcessLoginWithMissingEmail()
+    public function testProcessLoginWithMissingEmail(): void
     {
         $_POST['email'] = '';
         $_POST['password'] = 'password123';
@@ -66,7 +66,7 @@ class AuthControllerTest extends TestCase
         $this->assertEquals('/login', $_SESSION['_test_redirect']);
     }
 
-    public function testProcessLoginWithMissingPassword()
+    public function testProcessLoginWithMissingPassword(): void
     {
         $_POST['email'] = 'test@example.com';
         $_POST['password'] = '';
@@ -78,7 +78,7 @@ class AuthControllerTest extends TestCase
         $this->assertEquals('/login', $_SESSION['_test_redirect']);
     }
 
-    public function testLogout()
+    public function testLogout(): void
     {
         // Set up logged in state
         $_SESSION['user_id'] = 1;
@@ -92,7 +92,7 @@ class AuthControllerTest extends TestCase
         $this->assertEquals('/', $_SESSION['_test_redirect']);
     }
 
-    public function testShowLoginWhenNotLoggedIn()
+    public function testShowLoginWhenNotLoggedIn(): void
     {
         // Make sure user is not logged in
         unset($_SESSION['user_id']);
@@ -102,13 +102,16 @@ class AuthControllerTest extends TestCase
         $this->authController->showLogin();
         $output = ob_get_clean();
 
+        // Handle potential false return from ob_get_clean()
+        $outputString = $output !== false ? $output : '';
+
         // Should show login form
-        $this->assertStringContainsString('<form method="POST" action="/login">', $output);
-        $this->assertStringContainsString('name="email"', $output);
-        $this->assertStringContainsString('name="password"', $output);
+        $this->assertStringContainsString('<form method="POST" action="/login">', $outputString);
+        $this->assertStringContainsString('name="email"', $outputString);
+        $this->assertStringContainsString('name="password"', $outputString);
     }
 
-    public function testShowLoginWhenLoggedIn()
+    public function testShowLoginWhenLoggedIn(): void
     {
         // Set logged in state
         $_SESSION['user_id'] = 1;
@@ -120,7 +123,7 @@ class AuthControllerTest extends TestCase
         $this->assertEquals('/', $_SESSION['_test_redirect']);
     }
 
-    public function testShowLoginWithError()
+    public function testShowLoginWithError(): void
     {
         $_SESSION['login_error'] = 'Test error message';
         unset($_SESSION['user_id']); // Make sure not logged in
@@ -129,8 +132,11 @@ class AuthControllerTest extends TestCase
         $this->authController->showLogin();
         $output = ob_get_clean();
 
+        // Handle potential false return from ob_get_clean()
+        $outputString = $output !== false ? $output : '';
+
         // Should display error and clear it from session
-        $this->assertStringContainsString('Test error message', $output);
+        $this->assertStringContainsString('Test error message', $outputString);
         $this->assertArrayNotHasKey('login_error', $_SESSION);
     }
 }

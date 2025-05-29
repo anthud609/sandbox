@@ -14,7 +14,7 @@ class FeatureContext extends MinkContext implements Context
      *
      * @Given I am on the home page
      */
-    public function iAmOnTheHomePage()
+    public function iAmOnTheHomePage(): void
     {
         $this->visit('/');
     }
@@ -27,7 +27,7 @@ class FeatureContext extends MinkContext implements Context
      *
      * @Given I am logged in as :email with password :password
      */
-    public function iAmLoggedInAs($email, $password)
+    public function iAmLoggedInAs($email, $password): void
     {
         $this->visit('/login');
         $this->fillField('email', $email);
@@ -42,7 +42,7 @@ class FeatureContext extends MinkContext implements Context
      *
      * @When I click :link
      */
-    public function iClick($link)
+    public function iClick($link): void
     {
         $this->clickLink($link);
     }
@@ -52,7 +52,7 @@ class FeatureContext extends MinkContext implements Context
      *
      * @Then I should see the page content
      */
-    public function iShouldSeeThePageContent()
+    public function iShouldSeeThePageContent(): void
     {
         echo "\n--- PAGE CONTENT ---\n";
         echo $this->getSession()->getPage()->getContent();

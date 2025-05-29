@@ -1,4 +1,23 @@
 {
+    "name": "omni/core",
+    "description": "Omni Core Framework with modular authentication",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Omni\\Core\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Omni\\Core\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Anthony Hudson",
+            "email": "devops@districtomni.com"
+        }
+    ],
     "require-dev": {
         "behat/behat": "^3.11",
         "behat/mink": "^1.10",

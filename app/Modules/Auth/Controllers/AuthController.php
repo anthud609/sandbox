@@ -8,9 +8,9 @@ use Omni\Core\Modules\Auth\Models\User;
 
 class AuthController
 {
-    private $userModel;
+    private User $userModel;
 
-    private $testMode = false;
+    private bool $testMode = false;
 
     public function __construct()
     {
@@ -20,9 +20,9 @@ class AuthController
     /**
      * Enable test mode to prevent actual redirects
      *
-     * @param mixed $testMode
+     * @param bool $testMode
      */
-    public function setTestMode($testMode = true)
+    public function setTestMode(bool $testMode = true): void
     {
         $this->testMode = $testMode;
     }
@@ -30,9 +30,9 @@ class AuthController
     /**
      * Redirect helper that can be disabled in test mode
      *
-     * @param mixed $location
+     * @param string $location
      */
-    private function redirect($location)
+    private function redirect(string $location): void
     {
         if ($this->testMode) {
             // In test mode, just set a flag instead of redirecting
@@ -45,7 +45,7 @@ class AuthController
         exit;
     }
 
-    public function showLogin()
+    public function showLogin(): void
     {
         if (isset($_SESSION['user_id'])) {
             $this->redirect('/');
@@ -60,7 +60,7 @@ class AuthController
         include __DIR__ . '/../Views/LoginView.php';
     }
 
-    public function processLogin()
+    public function processLogin(): void
     {
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
@@ -84,7 +84,7 @@ class AuthController
         }
     }
 
-    public function logout()
+    public function logout(): void
     {
         if ($this->testMode) {
             // In test mode, just clear the session variables instead of destroying

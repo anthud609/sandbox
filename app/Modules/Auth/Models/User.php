@@ -6,8 +6,10 @@ namespace Omni\Core\Modules\Auth\Models;
 
 class User
 {
-    // Hardcoded users for demo
-    private $users = [
+    /**
+     * @var array<int, array{id:int, username:string, email:string, password:string}>
+     */
+    private array $users = [
         [
             'id' => 1,
             'username' => 'testuser',
@@ -22,7 +24,13 @@ class User
         ],
     ];
 
-    public function authenticate($email, $password)
+    /**
+     * @param string $email
+     * @param string $password
+     *
+     * @return array<string, mixed>|false
+     */
+    public function authenticate(string $email, string $password): array|false
     {
         foreach ($this->users as $user) {
             if ($user['email'] === $email && $user['password'] === $password) {
@@ -33,7 +41,12 @@ class User
         return false;
     }
 
-    public function findById($id)
+    /**
+     * @param int $id
+     *
+     * @return array<string, mixed>|false
+     */
+    public function findById(int $id): array|false
     {
         foreach ($this->users as $user) {
             if ($user['id'] === $id) {
@@ -44,7 +57,12 @@ class User
         return false;
     }
 
-    public function findByEmail($email)
+    /**
+     * @param string $email
+     *
+     * @return array<string, mixed>|false
+     */
+    public function findByEmail(string $email): array|false
     {
         foreach ($this->users as $user) {
             if ($user['email'] === $email) {

@@ -16,7 +16,7 @@ class UserModelTest extends TestCase
         $this->userModel = new User();
     }
 
-    public function testAuthenticateWithValidCredentials()
+    public function testAuthenticateWithValidCredentials(): void
     {
         $user = $this->userModel->authenticate('test@example.com', 'password123');
 
@@ -26,28 +26,28 @@ class UserModelTest extends TestCase
         $this->assertEquals('test@example.com', $user['email']);
     }
 
-    public function testAuthenticateWithInvalidCredentials()
+    public function testAuthenticateWithInvalidCredentials(): void
     {
         $user = $this->userModel->authenticate('wrong@example.com', 'wrongpassword');
 
         $this->assertFalse($user);
     }
 
-    public function testAuthenticateWithValidEmailButWrongPassword()
+    public function testAuthenticateWithValidEmailButWrongPassword(): void
     {
         $user = $this->userModel->authenticate('test@example.com', 'wrongpassword');
 
         $this->assertFalse($user);
     }
 
-    public function testAuthenticateWithEmptyCredentials()
+    public function testAuthenticateWithEmptyCredentials(): void
     {
         $user = $this->userModel->authenticate('', '');
 
         $this->assertFalse($user);
     }
 
-    public function testFindById()
+    public function testFindById(): void
     {
         $user = $this->userModel->findById(1);
 
@@ -56,21 +56,21 @@ class UserModelTest extends TestCase
         $this->assertEquals('test@example.com', $user['email']);
     }
 
-    public function testFindByIdNotFound()
+    public function testFindByIdNotFound(): void
     {
         $user = $this->userModel->findById(999);
 
         $this->assertFalse($user);
     }
 
-    public function testFindByIdWithZero()
+    public function testFindByIdWithZero(): void
     {
         $user = $this->userModel->findById(0);
 
         $this->assertFalse($user);
     }
 
-    public function testFindByEmail()
+    public function testFindByEmail(): void
     {
         $user = $this->userModel->findByEmail('test@example.com');
 
@@ -79,21 +79,21 @@ class UserModelTest extends TestCase
         $this->assertEquals('testuser', $user['username']);
     }
 
-    public function testFindByEmailNotFound()
+    public function testFindByEmailNotFound(): void
     {
         $user = $this->userModel->findByEmail('notfound@example.com');
 
         $this->assertFalse($user);
     }
 
-    public function testFindByEmailWithEmptyString()
+    public function testFindByEmailWithEmptyString(): void
     {
         $user = $this->userModel->findByEmail('');
 
         $this->assertFalse($user);
     }
 
-    public function testFindAdminUser()
+    public function testFindAdminUser(): void
     {
         $user = $this->userModel->authenticate('admin@example.com', 'admin123');
 

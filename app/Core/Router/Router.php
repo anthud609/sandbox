@@ -6,32 +6,43 @@ namespace Omni\Core\Core\Router;
 
 class Router
 {
-    private $routes = [];
+    /**
+     * @var array<string, array<string, callable|array{class-string, string}>>
+     */
+    private array $routes = [];
 
-    public function get($path, $handler)
+    /**
+     * @param string $path
+     * @param callable|array{class-string, string} $handler
+     */
+    public function get(string $path, callable|array $handler): void
     {
         $this->routes['GET'][$path] = $handler;
     }
 
-    public function post($path, $handler)
+    /**
+     * @param string $path
+     * @param callable|array{class-string, string} $handler
+     */
+    public function post(string $path, callable|array $handler): void
     {
         $this->routes['POST'][$path] = $handler;
     }
 
-    public function handle()
+    public function handle(): void
     {
-        $method = $_SERVER['REQUEST_METHOD'];
-        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+        $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 
         if (isset($this->routes[$method][$path])) {
             $handler = $this->routes[$method][$path];
 
             if (is_callable($handler)) {
                 call_user_func($handler);
-            } elseif (is_array($handler) && count($handler) === 2) {
-                $controller = new $handler[0]();
-                $method = $handler[1];
-                $controller->$method();
+            } elseif (is_array($handler) && count($handler) === 2 && is_string($handler[0]) && is_string($handler[1])) {
+                [$controllerClass, $controllerMethod] = $handler;
+                $controller = new $controllerClass();
+                $controller->$controllerMethod();
             }
         } else {
             http_response_code(404);
