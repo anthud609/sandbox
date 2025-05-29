@@ -4,7 +4,7 @@ Feature: User Authentication
   I need to be able to login and logout
 
   Background:
-    Given I am on the homepage
+    Given I am on homepage
 
   Scenario: User can access login page
     When I click "Login"

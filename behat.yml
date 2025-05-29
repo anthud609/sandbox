@@ -7,5 +7,6 @@ default:
         - Omni\Core\Modules\Auth\Tests\Feature\Bootstrap\FeatureContext
   extensions:
     Behat\MinkExtension:
-      base_url: http://lms.dev.local/
+      base_url: http://localhost/sandbox/public/
+      default_session: goutte
       goutte: ~
