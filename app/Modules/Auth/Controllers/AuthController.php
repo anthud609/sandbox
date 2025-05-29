@@ -6,17 +6,41 @@ use Omni\Core\Modules\Auth\Models\User;
 class AuthController 
 {
     private $userModel;
+    private $testMode = false;
 
     public function __construct() 
     {
         $this->userModel = new User();
     }
 
+    /**
+     * Enable test mode to prevent actual redirects
+     */
+    public function setTestMode($testMode = true)
+    {
+        $this->testMode = $testMode;
+    }
+
+    /**
+     * Redirect helper that can be disabled in test mode
+     */
+    private function redirect($location)
+    {
+        if ($this->testMode) {
+            // In test mode, just set a flag instead of redirecting
+            $_SESSION['_test_redirect'] = $location;
+            return;
+        }
+        
+        header('Location: ' . $location);
+        exit;
+    }
+
     public function showLogin() 
     {
         if (isset($_SESSION['user_id'])) {
-            header('Location: /');
-            exit;
+            $this->redirect('/');
+            return;
         }
 
         $error = $_SESSION['login_error'] ?? '';
@@ -33,8 +57,8 @@ class AuthController
 
         if (empty($email) || empty($password)) {
             $_SESSION['login_error'] = 'Email and password are required';
-            header('Location: /login');
-            exit;
+            $this->redirect('/login');
+            return;
         }
 
         $user = $this->userModel->authenticate($email, $password);
@@ -42,17 +66,22 @@ class AuthController
         if ($user) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            header('Location: /');
-            exit;
+            $this->redirect('/');
         } else {
             $_SESSION['login_error'] = 'Invalid email or password';
-            header('Location: /login');
-            exit;
+            $this->redirect('/login');
         }
     }
 
     public function logout() 
     {
+        if ($this->testMode) {
+            // In test mode, just clear the session variables instead of destroying
+            unset($_SESSION['user_id'], $_SESSION['username']);
+            $_SESSION['_test_redirect'] = '/';
+            return;
+        }
+        
         session_destroy();
         header('Location: /');
         exit;
